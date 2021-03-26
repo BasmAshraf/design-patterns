@@ -20,7 +20,7 @@ namespace GildedRoseKata.Test
 
         private Item GetAgedBrie()
         {
-            return new Item { Name = "Aged Brie", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
+            return new AgedBrieItem { Name = "Aged Brie", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
         }
 
         [Fact]

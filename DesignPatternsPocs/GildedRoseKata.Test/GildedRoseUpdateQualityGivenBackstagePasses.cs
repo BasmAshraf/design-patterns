@@ -20,7 +20,7 @@ namespace GildedRoseKata.Test
 
         private Item GetBackstagePasses()
         {
-            return new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
+            return new BackstageItem { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
         }
 
         [Theory]

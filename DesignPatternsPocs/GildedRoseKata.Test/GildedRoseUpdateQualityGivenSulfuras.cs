@@ -20,7 +20,7 @@ namespace GildedRoseKata.Test
 
         private Item GetSulfuras()
         {
-            return new Item { Name = "Sulfuras, Hand of Ragnaros", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
+            return new SulfurasItem { Name = "Sulfuras, Hand of Ragnaros", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
         }
 
         [Fact]

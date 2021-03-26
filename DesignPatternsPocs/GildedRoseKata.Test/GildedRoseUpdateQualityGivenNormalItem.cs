@@ -20,7 +20,7 @@ namespace GildedRoseKata.Test
 
         private Item GetNormalItem()
         {
-            return new Item { Name = "Normal Item", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
+            return new NormalItem { Name = "Normal Item", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
         }
 
         [Fact]
