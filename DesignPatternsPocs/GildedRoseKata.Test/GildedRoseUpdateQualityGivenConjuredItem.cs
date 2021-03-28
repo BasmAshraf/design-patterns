@@ -24,7 +24,7 @@ namespace GildedRoseKata.Test
             return new Item { Name = "Conjured Mana Cake", Quality = INITIAL_QUALITY, SellIn = INITIAL_SELL_IN };
         }
 
-        [Fact(Skip = "Not implemented")]
+        [Fact()]
         public void ReducesConjuredItemQualityBy2GivenPositiveSellIn()
         {
             _service.UpdateQuality();
@@ -32,7 +32,7 @@ namespace GildedRoseKata.Test
             Assert.Equal(INITIAL_QUALITY - 2, _item.Quality);
         }
 
-        [Fact(Skip = "Not implemented")]
+        [Fact()]
         public void ReducesConjuredItemQualityBy4GivenNonPositiveSellIn()
         {
             _item.SellIn = 0;
@@ -41,7 +41,7 @@ namespace GildedRoseKata.Test
             Assert.Equal(INITIAL_QUALITY - 4, _item.Quality);
         }
 
-        [Theory(Skip = "Not implemented")]
+        [Theory()]
         [InlineData(1)]
         [InlineData(0)]
         public void DoesNotReduceQualityBelowZero(int initialQuality)
@@ -52,7 +52,7 @@ namespace GildedRoseKata.Test
             Assert.Equal(0, _item.Quality);
         }
 
-        [Theory(Skip = "Not implemented")]
+        [Theory()]
         [InlineData(4)]
         [InlineData(3)]
         [InlineData(2)]
@@ -67,7 +67,7 @@ namespace GildedRoseKata.Test
             Assert.Equal(0, _item.Quality);
         }
 
-        [Fact(Skip = "Not implemented")]
+        [Fact()]
         public void ReducesConjuredItemSellInBy1()
         {
             _service.UpdateQuality();
@@ -75,7 +75,7 @@ namespace GildedRoseKata.Test
             Assert.Equal(INITIAL_SELL_IN - 1, _item.SellIn);
         }
 
-        [Fact(Skip = "Not implemented")]
+        [Fact()]
         public void DoesReduceSellInBelowZero()
         {
             _item.SellIn = 0;
