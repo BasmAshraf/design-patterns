@@ -8,6 +8,7 @@ namespace TheOrderKata
     public class Order
     {
         public ITaxCalculation TaxCalculation { get; set; }
+
         public Dictionary<Item, int> LineItems { get; } = new Dictionary<Item, int>();
 
         public IList<Payment> SelectedPayments { get; } = new List<Payment>();
