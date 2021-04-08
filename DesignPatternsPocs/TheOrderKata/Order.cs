@@ -9,6 +9,8 @@ namespace TheOrderKata
     {
         public ITaxCalculation TaxCalculation { get; set; }
 
+        public IInvoiceCreation InvoiceCreation { get; set; }
+
         public Dictionary<Item, int> LineItems { get; } = new Dictionary<Item, int>();
 
         public IList<Payment> SelectedPayments { get; } = new List<Payment>();
@@ -25,9 +27,15 @@ namespace TheOrderKata
 
         public decimal GetTax()
         {
-            if(TaxCalculation is null)
+            if (TaxCalculation is null)
                 return 0m;
             return TaxCalculation.GetTax(this);
+        }
+        public void GenerateInvoice()
+        {
+            if (InvoiceCreation is null)
+                return;
+            InvoiceCreation.Generate(this);
         }
     }
 

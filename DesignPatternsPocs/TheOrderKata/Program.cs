@@ -29,7 +29,9 @@ namespace TheOrderKata
             {
                 order.TaxCalculation = new USTaxCalculation();
             }
+            order.InvoiceCreation = new EmailInvoiceCreation();
             Console.WriteLine(order.GetTax());
+            order.GenerateInvoice();
         }
     }
 }
