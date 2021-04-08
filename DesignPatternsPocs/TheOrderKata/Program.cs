@@ -12,8 +12,10 @@ namespace TheOrderKata
                 {
                     OriginCountry = "Sweden",
                     DestinationCountry = "Sweden"
-                }
-            };
+                },
+                InvoiceCreation = new EmailInvoiceCreation(),
+                Shipping = new FedExShipping()
+        };
 
             order.LineItems.Add(new Item("CSHARP_SMORGASBORD", "C# Smorgasbord", 100m, ItemType.Literature), 1);
             order.LineItems.Add(new Item("CONSULTING", "Building a website", 100m, ItemType.Service), 1);
@@ -29,9 +31,8 @@ namespace TheOrderKata
             {
                 order.TaxCalculation = new USTaxCalculation();
             }
-            order.InvoiceCreation = new EmailInvoiceCreation();
             Console.WriteLine(order.GetTax());
-            order.GenerateInvoice();
+            order.FinalizeOrder();
         }
     }
 }

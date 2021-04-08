@@ -10,6 +10,7 @@ namespace TheOrderKata
         public ITaxCalculation TaxCalculation { get; set; }
 
         public IInvoiceCreation InvoiceCreation { get; set; }
+        public IShipping Shipping { get; set; }
 
         public Dictionary<Item, int> LineItems { get; } = new Dictionary<Item, int>();
 
@@ -31,12 +32,12 @@ namespace TheOrderKata
                 return 0m;
             return TaxCalculation.GetTax(this);
         }
-        public void GenerateInvoice()
+        public void FinalizeOrder()
         {
-            if (InvoiceCreation is null)
-                return;
-            InvoiceCreation.Generate(this);
+            InvoiceCreation?.Generate(this);
+            Shipping?.Ship(this);
         }
+
     }
 
     public class ShippingDetails
