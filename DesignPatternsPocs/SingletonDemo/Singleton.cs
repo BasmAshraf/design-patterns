@@ -3,10 +3,12 @@ using System;
 
 namespace SingletonDemo.NaiveApproach
 {
-    //Bad code, not thread safe
+    //NaiveApproach, not thread-safe
+    //Adding lock, thread-safe
     public class Singleton
     {
         private static Singleton _instance;
+        private static object padLock = new object();
         private Singleton()
         {
             Logger.Log("Constructor invoked");
@@ -17,7 +19,25 @@ namespace SingletonDemo.NaiveApproach
             get
             {
                 Logger.Log("Instance called");
-                return _instance ??=new Singleton();
+                //lock (padLock)
+                //{
+                //    if (_instance == null)
+                //        _instance = new Singleton();
+                //    return _instance;
+                //}
+
+                //double checking lock approach
+                if (_instance == null)
+                {
+                    lock (padLock)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new Singleton();
+                        }
+                    }
+                }
+                return _instance;
             }
         }
 

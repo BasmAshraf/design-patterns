@@ -61,7 +61,7 @@ namespace SingletonDemo.Test
             var log = Logger.Output();
             try
             {
-                Assert.True(log.Count(log => log.Contains("Constructor")) > 1);
+                Assert.True(log.Count(log => log.Contains("Constructor")) == 1);
                 Assert.Equal(3, log.Count(log => log.Contains("Instance")));
             }
             finally
