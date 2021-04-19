@@ -37,6 +37,42 @@ namespace BridgePattern
         }
     }
 
+    public class SeniorTwoDaysLicense : TwoDaysLicense
+    {
+        public SeniorTwoDaysLicense(string movie, DateTime purchaseTime)
+            : base(movie, purchaseTime)
+        {
+        }
+
+        public override decimal GetPrice()
+        {
+            return base.GetPrice() * 0.2m;
+        }
+
+        public override DateTime? GetExpirationDate()
+        {
+            return PurchaseTime.AddDays(2);
+        }
+    }
+
+    public class MilitaryTwoDaysLicense : TwoDaysLicense
+    {
+        public MilitaryTwoDaysLicense(string movie, DateTime purchaseTime)
+            : base(movie, purchaseTime)
+        {
+        }
+
+        public override decimal GetPrice()
+        {
+            return base.GetPrice() * 0.8m;
+        }
+
+        public override DateTime? GetExpirationDate()
+        {
+            return PurchaseTime.AddDays(2);
+        }
+    }
+
     public class LifeLongLicense : MovieLicense
     {
         public LifeLongLicense(string movie, DateTime purchaseTime)
@@ -47,6 +83,42 @@ namespace BridgePattern
         public override decimal GetPrice()
         {
             return 8;
+        }
+
+        public override DateTime? GetExpirationDate()
+        {
+            return null;
+        }
+    }
+
+    public class SeniorLifeLongLicense : LifeLongLicense
+    {
+        public SeniorLifeLongLicense(string movie, DateTime purchaseTime)
+            : base(movie, purchaseTime)
+        {
+        }
+
+        public override decimal GetPrice()
+        {
+            return base.GetPrice() * 0.2m;
+        }
+
+        public override DateTime? GetExpirationDate()
+        {
+            return null;
+        }
+    }
+
+    public class MilitaryLifeLongLicense : LifeLongLicense
+    {
+        public MilitaryLifeLongLicense(string movie, DateTime purchaseTime)
+            : base(movie, purchaseTime)
+        {
+        }
+
+        public override decimal GetPrice()
+        {
+            return base.GetPrice() * 0.8m;
         }
 
         public override DateTime? GetExpirationDate()
