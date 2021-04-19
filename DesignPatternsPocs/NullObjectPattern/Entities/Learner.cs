@@ -17,4 +17,14 @@ namespace NullObjectPattern.Entities
 
         public int CoursesCompleted { get; private set; }
     }
+
+    public class NullLearner : ILearner
+    {
+        public int Id => 0;
+
+        public string UserName => "Just browsing";
+
+        public int CoursesCompleted => 0;
+    }
+
 }
