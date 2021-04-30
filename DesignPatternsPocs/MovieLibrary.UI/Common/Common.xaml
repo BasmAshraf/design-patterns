@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MovieLibrary.UI.Common"
+                    xmlns:converters="clr-namespace:MovieLibrary.UI.Converters">
+
+    <converters:InvertedBooleanConverter x:Key="invertedBooleanConverter" />
+    <converters:BooleanToYesConverter x:Key="booleanToYesConverter" />
+</ResourceDictionary>
