@@ -15,6 +15,15 @@ namespace MovieLibrary.Data.Entities
         protected Movie()
         {
         }
+        public virtual bool IsSuitableForChildren()
+        {
+            return MpaaRating <= MpaaRating.PG;
+        }
+
+        public virtual bool HasCDVersion()
+        {
+            return ReleaseDate <= DateTime.Now.AddMonths(-6);
+        }
     }
 
 

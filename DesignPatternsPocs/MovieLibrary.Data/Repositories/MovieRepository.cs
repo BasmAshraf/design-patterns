@@ -2,6 +2,7 @@
 using MovieLibrary.Data.Entities;
 using MovieLibrary.Data.ORM;
 using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,11 +18,15 @@ namespace MovieLibrary.Data.Repositories
             }
         }
 
-        public IReadOnlyList<Movie> GetList()
+        public IReadOnlyList<Movie> GetList(bool forKidsOnly, double minRating, bool OnCD)
         {
             using (ISession session = SessionFactory.OpenSession())
             {
-                return session.Query<Movie>().ToList();
+                return session.Query<Movie>()
+                    .Where(m => !forKidsOnly || m.MpaaRating <= MpaaRating.PG)
+                    .Where(m=> m.Rating >= minRating)
+                    .Where(m=> !OnCD || m.ReleaseDate <= DateTime.Now.AddMonths(-6))
+                    .ToList();
             }
         }
     }
