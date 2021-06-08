@@ -18,14 +18,15 @@ namespace MovieLibrary.Data.Repositories
             }
         }
 
-        public IReadOnlyList<Movie> GetList(bool forKidsOnly, double minRating, bool OnCD)
+        public IReadOnlyList<Movie> GetList(
+            Specification<Movie> specification,
+            double minimumRating)
         {
             using (ISession session = SessionFactory.OpenSession())
             {
                 return session.Query<Movie>()
-                    .Where(m => !forKidsOnly || m.MpaaRating <= MpaaRating.PG)
-                    .Where(m=> m.Rating >= minRating)
-                    .Where(m=> !OnCD || m.ReleaseDate <= DateTime.Now.AddMonths(-6))
+                    .Where(specification.ToExpression())
+                    .Where(x => x.Rating >= minimumRating)
                     .ToList();
             }
         }

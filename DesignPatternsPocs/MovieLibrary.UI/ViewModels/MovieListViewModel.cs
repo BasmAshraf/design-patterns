@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using MovieLibrary.Data;
 using MovieLibrary.Data.Entities;
 using MovieLibrary.Data.Repositories;
 using MovieLibrary.UI.Common;
@@ -38,7 +39,8 @@ namespace MovieLibrary.UI.ViewModels
                 return;
 
             Movie movie = movieOrNothing.Value;
-            if (movie.ReleaseDate >= DateTime.Now.AddMonths(-6))
+            var spec = new AvailableOnCDSpecification();
+            if (!spec.IsSatisfiedBy(movie))
             {
                 MessageBox.Show("The movie doesn't have a CD version", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -56,7 +58,8 @@ namespace MovieLibrary.UI.ViewModels
                 return;
 
             Movie movie = movieOrNothing.Value;
-            if (!movie.IsSuitableForChildren())
+            var spec = new MovieForKidsSpecification();
+            if (!spec.IsSatisfiedBy(movie))
             {
                 MessageBox.Show("The movie is not suitable for children", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Error);
@@ -75,7 +78,19 @@ namespace MovieLibrary.UI.ViewModels
 
         private void Search()
         {
-            Movies = _repository.GetList(ForKidsOnly,MinimumRating,OnCD);
+            Specification<Movie> spec = Specification<Movie>.All;
+
+            if (ForKidsOnly)
+            {
+                spec = spec.And(new MovieForKidsSpecification());
+            }
+            if (OnCD)
+            {
+                spec = spec.And(new AvailableOnCDSpecification());
+            }
+
+            Movies = _repository.GetList(spec, MinimumRating);
+
             Notify(nameof(Movies));
         }
     }
