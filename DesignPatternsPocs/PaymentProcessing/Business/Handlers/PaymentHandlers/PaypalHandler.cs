@@ -6,6 +6,12 @@ namespace Payment_processing.Business.Handlers.PaymentHandlers
 {
     public class PaypalHandler : PaymentHandler
     {
-        /// TODO: Implement me
+        private IPaymentProcessor paymentProcessor = new PaypalPaymentProcessor();
+        public override void Handle(Order order)
+        {
+            if (order.SelectedPayments.Any(x => x.PaymentProvider == PaymentProvider.Paypal))
+                paymentProcessor.Finalize(order);
+            base.Handle(order);
+        }
     }
 }

@@ -6,6 +6,12 @@ namespace Payment_processing.Business.Handlers.PaymentHandlers
 {
     public class CreditCardHandler : PaymentHandler
     {
-        /// TODO: Implement me
+        private IPaymentProcessor paymentProcessor = new CreditCardPaymentProcessor();
+        public override void Handle(Order order)
+        {
+            if (order.SelectedPayments.Any(x => x.PaymentProvider == PaymentProvider.CreditCard))
+                paymentProcessor.Finalize(order);
+            base.Handle(order);
+        }
     }
 }
